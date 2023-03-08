@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const { Configuration, OpenAIApi } = require('openai');
@@ -6,13 +7,14 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+const apikey = process.env.APIKEY;
 
 app.get('/message', async (req, res) => {
   const prompt = req.query.prompt;
   console.log('User -> ' + prompt);
 
   const configuration = new Configuration({
-    apiKey: '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',
+    apiKey: apikey,
   });
   const openai = new OpenAIApi(configuration);
 
